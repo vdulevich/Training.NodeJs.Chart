@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default" role="navigation">
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="/">Home</a></li>
+        <% if(user) { %>
+        <li><a href="/chart">Chart</a></li>
+        <% } %>
+    </ul>
+    <div class="navbar-collapse collapse navbar-right">
+        <ul class="nav navbar-nav">
+            <% if(user) { %>
+            <li><a>Welcome <strong>'<%=user.name%>'</strong></a></li>
+            <li><a href="#" onclick="$.post('/logout', function(){ window.location = '/'; })">Logout</a></li>
+            <% } else { %>
+            <li><a href="/login">Login</a></li>
+            <% } %>
+        </ul>
+    </div>
+</nav>

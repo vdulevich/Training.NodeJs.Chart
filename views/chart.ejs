@@ -1,0 +1,38 @@
+<% layout('./layout/page') -%>
+<% var containerId = 'chartContainer' %>
+<div id="<%= containerId %>">
+    <form accept-charset="UTF-8" role="form" onsubmit="login();">
+        <div class="row form-group-lg">
+            <div class="col-md-9">
+                <input class="form-control" type="text" name="message"/>
+            </div>
+            <div class="col-md-3">
+                <input class="form-control btn btn-lg btn-success btn-block" value="Send" onclick="send();">
+            </div>
+        </div>
+    </form>
+    <ul class="chart-container list-group">
+    </ul>
+</div>
+
+<script src="js/socket.io.js"></script>
+<script>
+    var form = $('#<%=containerId%> form');
+    var ul = $('#<%=containerId%> ul')[0];
+    var socket = io.connect();
+
+    socket.on('message', function (data) {
+        appendMessage(data.message);
+    });
+
+    function send(){
+        var data = form.serializeArray();
+        socket.emit('message', { message: data[0].value }, function(){
+            appendMessage(data[0].value);
+        });
+    }
+
+    function appendMessage(message){
+        ul.appendChild($(['<li class="list-group-item"> Message: ',message,'</li>'].join(''))[0]);
+    }
+</script>

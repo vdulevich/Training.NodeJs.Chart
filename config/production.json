@@ -1,0 +1,18 @@
+{
+  "server": {
+    "host": "https://chart.herokuapp.com/",
+    "port": 80
+  },
+  "mongoose":{
+    "uri": "mongodb://chart:chart@ds035975.mongolab.com:35975/heroku_mgh5927c"
+  },
+  "session" :{
+    "name": "sid",
+    "secret": "secretKey",
+    "cookie": {
+      "path": "/",
+      "httpOnly": true,
+      "maxAge": null
+    }
+  }
+}
