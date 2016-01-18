@@ -17,7 +17,9 @@ var serverConfig = config.get('server');
 var port = serverConfig.port || process.env.PORT || 3000;
 
 app.set('port', port);
-app.set('host', serverConfig.host);
+if(serverConfig.host) {
+  app.set('host', serverConfig.host);
+}
 /**
  * Create HTTP server.
  */
