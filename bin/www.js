@@ -4,22 +4,21 @@
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('app');
 var debug = require('debug')('chart:server');
 var http = require('http');
 var config = require('config');
-var Chart = require('../lib/chart');
+var Chart = require('lib/chart');
 
 /**
  * Get port from environment and store in Express.
  */
 var serverConfig = config.get('server');
-var port = serverConfig.port || process.env.PORT || 3000;
+var port = serverConfig.port || process.env.PORT || 5000;
 
 app.set('port', port);
-if(serverConfig.host) {
-  app.set('host', serverConfig.host);
-}
+//app.set('host', serverConfig.host);
+
 /**
  * Create HTTP server.
  */
