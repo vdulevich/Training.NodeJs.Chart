@@ -1,4 +1,4 @@
-var User = require('models/User');
+var User = require('models/user');
 
 module.exports = function(req, res, next){
     req.user = res.locals.user = null;
