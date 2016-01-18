@@ -44,7 +44,7 @@ function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-
+  var port = serverConfig.port;
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
