@@ -1,7 +1,6 @@
 {
   "server": {
-    "host": "https://chart.herokuapp.com/",
-    "port": 3000
+    "host": "https://chart.herokuapp.com/"
   },
   "mongoose":{
     "uri": "mongodb://chart:chart@ds035975.mongolab.com:35975/heroku_mgh5927c"

@@ -14,7 +14,9 @@ var Chart = require('../lib/chart');
  * Get port from environment and store in Express.
  */
 var serverConfig = config.get('server');
-app.set('port', serverConfig.port);
+var port = serverConfig.port || process.env.PORT || 3000;
+
+app.set('port', port);
 app.set('host', serverConfig.host);
 /**
  * Create HTTP server.
@@ -44,7 +46,6 @@ function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
   }
-  var port = serverConfig.port;
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
