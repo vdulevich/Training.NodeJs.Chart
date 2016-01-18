@@ -1,7 +1,7 @@
 var crypto = require("crypto");
 var mongoose = require("mongoose");
 var async = require('async');
-var AuthError = require('../errors').AuthError;
+var AuthError = require('errors').AuthError;
 
 var schema = mongoose.Schema({
     name:{
