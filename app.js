@@ -32,6 +32,8 @@ app.use(session({
   cookie: config.get('session').cookie,
   name: config.get('session').name,
   secret: config.get('session').secret,
+  resave: config.get('session').resave,
+  saveUninitialized: config.get('session').saveUninitialized,
   store: new MongoStore({ mongooseConnection : mongoose.connection})
 }));
 

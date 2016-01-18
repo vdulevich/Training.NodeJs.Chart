@@ -13,6 +13,8 @@
       "path": "/",
       "httpOnly": true,
       "maxAge": null
-    }
+    },
+    "resave": true,
+    "saveUninitialized": true
   }
 }
