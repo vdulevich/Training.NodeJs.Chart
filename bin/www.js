@@ -14,11 +14,10 @@ var Chart = require('lib/chart');
  * Get port from environment and store in Express.
  */
 var serverConfig = config.get('server');
-var port =  process.env.PORT || serverConfig.port || 5000;
+var port = serverConfig.port || process.env.PORT;
 
-console.log(serverConfig.port);
 app.set('port', port);
-//app.set('host', serverConfig.host);
+app.set('host', serverConfig.host);
 
 /**
  * Create HTTP server.
