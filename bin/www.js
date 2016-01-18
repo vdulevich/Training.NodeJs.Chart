@@ -8,7 +8,7 @@ var app = require('app');
 var debug = require('debug')('chart:server');
 var http = require('http');
 var config = require('config');
-var Chart = require('lib/chart');
+
 
 /**
  * Get port from environment and store in Express.
@@ -34,11 +34,11 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /*
-* Chart IO
+* Socket IO
 * */
-
-var chart = new Chart(server);
-
+var socketConfig = config.get('socket');
+var io = require('lib/socket.io')(server);
+io.set('origins', socketConfig.origins);
 /**
  * Event listener for HTTP server "error" event.
  */

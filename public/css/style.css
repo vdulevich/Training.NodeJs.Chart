@@ -6,13 +6,3 @@ body {
 a {
   color: #00B7FF;
 }
-
-.chart-container{
-  margin-top: 20px;
-}
-
-.chart-container > li {
-  border:none;
-  background-color: #d6e9c6;
-  margin-top: 2px;
-}

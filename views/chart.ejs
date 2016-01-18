@@ -1,6 +1,12 @@
 <% layout('./layout/page') -%>
+<% block('scripts', "vendor/bower_components/socket.io-client/socket.io.js") -%>
+
 <% var containerId = 'chartContainer' %>
+<% var messagesId = 'chartMessages' %>
+<% var connectionStatusId = 'chartConnectionStatus' %>
+
 <div id="<%= containerId %>">
+    <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
     <form accept-charset="UTF-8" role="form" onsubmit="login();">
         <div class="row form-group-lg">
             <div class="col-md-9">
@@ -11,28 +17,64 @@
             </div>
         </div>
     </form>
-    <ul class="chart-container list-group">
+    <ul id="<%= messagesId %>" class="list-group">
     </ul>
 </div>
 
-<script src="js/socket.io.js"></script>
 <script>
-    var form = $('#<%=containerId%> form');
-    var ul = $('#<%=containerId%> ul')[0];
-    var socket = io.connect();
+    var formEl = $('#<%=containerId%> form');
+    var messagesEl = $('#<%=messagesId%>')[0];
+    var connectionStatusEl = $('#<%=connectionStatusId%>')[0];
+    var socket = io.connect('', { reconnect: false });
 
-    socket.on('message', function (data) {
-        appendMessage(data.message);
-    });
+    connectionState("Connecting");
+    socket
+        .on('message', function (data) {
+            printMessage(data);
+        })
+        .on('join', function(name){
+            printInfo(["'", name,"'", ' joined chart'].join(''));
+        })
+        .on('leave', function(name){
+            printInfo(["'", name,"'", ' leaved chart'].join(''));
+        })
+        .on('connect', function(){
+            formEl.find('input').removeAttr("disabled");
+            connectionState("Online");
+        })
+        .on('disconnect', function(){
+            formEl.find('input').attr("disabled", true);
+            connectionState("Offline");
+            setTimeout(reconnect, 500);
+        });
+
+    function reconnect(){
+        socket.io.once('connect_error', function(){
+            setTimeout(reconnect, 500);
+        });
+        socket.connect();
+    }
 
     function send(){
-        var data = form.serializeArray();
-        socket.emit('message', { message: data[0].value }, function(){
-            appendMessage(data[0].value);
+        var data = formEl.serializeArray();
+        socket.emit('message', data[0].value , function(data){
+            printMessage(data);
         });
     }
 
-    function appendMessage(message){
-        ul.appendChild($(['<li class="list-group-item"> Message: ',message,'</li>'].join(''))[0]);
+    function printInfo(message){
+        appendMessage(message);
+    }
+
+    function printMessage(data){
+        appendMessage(["'", data.user ,"' > ", data.message].join(''), 'list-group-item-info');
+    }
+
+    function appendMessage(message, type){
+        messagesEl.appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
+    }
+
+    function connectionState(state){
+        connectionStatusEl.innerHTML = state;
     }
 </script>

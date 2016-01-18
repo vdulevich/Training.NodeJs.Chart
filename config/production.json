@@ -1,11 +1,10 @@
 {
   "server": {
-    "host": null,
-    "port": null
   },
   "mongoose":{
     "uri": "mongodb://chart:chart@ds035975.mongolab.com:35975/heroku_mgh5927c"
   },
-  "session" :{
+  "socket":{
+    "origins": "https://chart.herokuapp.com:*"
   }
 }

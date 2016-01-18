@@ -5,16 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var HttpError = require('errors').HttpError;
-var mongoose = require('lib/mongoose');
 var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
 var config = require('config');
+var sessionStore = require('lib/sessionStore');
 
 var checkAuth = require('./middleware/checkAuth');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
-var chart = require('./routes/chart');
-var index = require('./routes/index');
+var login = require('routes/login');
+var logout = require('routes/logout');
+var chart = require('routes/chart');
+var index = require('routes/index');
 var app = express();
 
 // view engine setup
@@ -34,12 +33,12 @@ app.use(session({
   secret: config.get('session').secret,
   resave: config.get('session').resave,
   saveUninitialized: config.get('session').saveUninitialized,
-  store: new MongoStore({ mongooseConnection : mongoose.connection})
+  store: sessionStore
 }));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(require('./middleware/sendHttpError'));
-app.use(require('./middleware/loadUser'));
+app.use(require('middleware/sendHttpError'));
+app.use(require('middleware/loadUser'));
 
 app.use('/chart', checkAuth, chart);
 app.use('/', index );
