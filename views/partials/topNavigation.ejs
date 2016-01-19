@@ -9,7 +9,7 @@
         <ul class="nav navbar-nav">
             <% if(user) { %>
             <li><a>Welcome <strong>'<%=user.name%>'</strong></a></li>
-            <li><a onclick="$('body').mask('Loading...'); $.post('/logout', function(){ window.location = '/'; })">Logout</a></li>
+            <li><a onclick="$('body').mask('Loading...'); $.post('/logout', function(){ window.location = '/'; }).always(function(){ $('body').unmask();} ); ">Logout</a></li>
             <% } else { %>
             <li><a href="/login">Login</a></li>
             <% } %>

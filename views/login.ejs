@@ -55,6 +55,8 @@
                     form.find('.form-group').addClass('has-error').removeClass('hide');
                 }
             }
+        }).always(function(){
+            $('body').unmask();
         });
     }
 </script>
