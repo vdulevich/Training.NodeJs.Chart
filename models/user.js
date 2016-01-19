@@ -24,7 +24,9 @@ var schema = mongoose.Schema({
 });
 
 schema.methods.encryptPassword = function(password){
-    return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+    if(password) {
+        return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
+    }
 }
 
 schema.virtual('password')
