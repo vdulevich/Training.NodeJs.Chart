@@ -1,0 +1,14 @@
+{
+  "name": "jquery-loadmask",
+  "homepage": "https://github.com/wallynm/jquery-loadmask",
+  "_release": "5cd1d922cf",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "5cd1d922cf8c83c65a6e250732aa4b1636e38a57"
+  },
+  "_source": "git://github.com/wallynm/jquery-loadmask.git",
+  "_target": "*",
+  "_originalSource": "jquery-loadmask",
+  "_direct": true
+}

@@ -2,9 +2,11 @@
 <html>
     <head>
         <link rel="stylesheet" href="/vendor/bower_components/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="/vendor/bower_components/jquery-loadmask/jquery.loadmask.css" />
         <link rel="stylesheet" href="/css/style.css" />
         <script type="text/javascript" src="/vendor/bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script type="text/javascript" src="/vendor/bower_components/jquery-loadmask/jquery.loadmask.min.js"></script>
         <% if(blocks.scripts) { blocks.scripts.html.forEach(function(script) { %><script type="text/javascript" src="<%- script %>"></script><%  })} %>
     </head>
     <body>

@@ -5,16 +5,17 @@
 <% var messagesListId = 'chatMessageList' %>
 <% var chatMessageInputId = 'chatMessageInput' %>
 <% var connectionStatusId = 'chartConnectionStatus' %>
+<% var messagesButtonId = 'chatMessagesButton' %>
 
 <div id="<%= containerId %>" class="ch-chat-container">
     <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
-    <form accept-charset="UTF-8" role="form" onsubmit="login();">
+    <form accept-charset="UTF-8" role="form">
         <div class="row form-group-lg">
             <div class="col-md-9">
                 <input id="<%=chatMessageInputId%>" class="form-control" type="text" name="message"/>
             </div>
             <div class="col-md-3">
-                <input class="form-control btn btn-lg btn-success btn-block" value="Send" onclick="send();">
+                <input id="<%=messagesButtonId%>" class="form-control btn btn-lg btn-success btn-block" value="Send">
             </div>
         </div>
     </form>
@@ -23,20 +24,26 @@
 </div>
 
 <script>
-    var formEl = $('#<%=containerId%> form');
-    var messagesInputEl = $('#<%=chatMessageInputId%>')[0];
-    var messagesListEl = $('#<%=messagesListId%>')[0];
-    var connectionStatusEl = $('#<%=connectionStatusId%>')[0];
     var socket = io.connect('', { reconnect: false });
+    var formEl = $('#<%=containerId%> form');
+    var messagesInputEl = $('#<%=chatMessageInputId%>');
+    var messagesButtonEl = $('#<%=messagesButtonId%>');
+    var messagesListEl = $('#<%=messagesListId%>');
+    var connectionStatusEl = $('#<%=connectionStatusId%>');
 
-    formEl.bind('keypress', function(e) {
-        var keyCode = e.keyCode || e.which;
-        if(keyCode == 13){
-            send();
-        }
-    });
+    messagesButtonEl
+        .bind('click', send);
 
-    connectionState("Connecting");
+    formEl
+        .bind('keypress', function(e) {
+            var keyCode = e.keyCode || e.which;
+            if(keyCode == 13){
+                send();
+            }
+        })
+        .bind('submit', send);
+
+    printConnectionState("Connecting");
     socket
         .on('message', function (data) {
             printMessage(data);
@@ -49,11 +56,11 @@
         })
         .on('connect', function(){
             formEl.find('input').removeAttr("disabled");
-            connectionState("Online");
+            printConnectionState("Online");
         })
         .on('disconnect', function(){
             formEl.find('input').attr("disabled", true);
-            connectionState("Offline");
+            printConnectionState("Offline");
             setTimeout(reconnect, 500);
         });
 
@@ -66,25 +73,27 @@
 
     function send(){
         var data = formEl.serializeArray();
+        formEl.mask();
         socket.emit('message', data[0].value , function(data){
             printMessage(data);
             messagesInputEl.value = '';
+            formEl.unmask();
         });
     }
 
     function printInfo(message){
-        appendMessage(message);
+        printText(message);
     }
 
     function printMessage(data){
-        appendMessage(["'", data.user ,"' > ", data.message].join(''), 'list-group-item-info');
+        printText(["'", data.user ,"' > ", data.message].join(''), 'list-group-item-info');
     }
 
-    function appendMessage(message, type){
-        messagesListEl.appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
+    function printText(message, type){
+        messagesListEl[0].appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
     }
 
-    function connectionState(state){
-        connectionStatusEl.innerHTML = state;
+    function printConnectionState(state){
+        connectionStatusEl[0].innerHTML = state;
     }
 </script>

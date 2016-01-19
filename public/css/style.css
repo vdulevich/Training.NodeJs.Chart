@@ -16,7 +16,15 @@ a:hover {
 
 .ch-main-container{
   height: 100%;
-  overflow: hidden;
+
+}
+
+.ch-top-nav-container {
+  padding-top:50px;
+  margin-bottom: 0px;
+}
+
+.ch-chat-container {
 }
 
 .ch-chat-messages-list {
@@ -28,14 +36,4 @@ a:hover {
 
 .ch-chat-messages-list .list-group-item{
   border-radius: 0px;
-}
-
-.ch-chat-container {
-  height: 100%;
-  overflow: hidden;
-}
-
-.ch-top-nav-container {
-  margin-top: 50px;
-  margin-bottom: 0px;
 }
