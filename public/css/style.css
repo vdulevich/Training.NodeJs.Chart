@@ -1,8 +1,37 @@
+html, body{
+  height: 100%;
+}
+
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.ch-main-container{
+  height: 100%;
+  overflow: hidden;
+}
+
+.ch-chat-messages-list {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  height: 100%;
+  background-color: #f7f7f7;
+}
+
+.ch-chat-messages-list .list-group-item{
+  border-radius: 0px;
+}
+
+.ch-chat-container {
+  height: 100%;
+  overflow: hidden;
+}
+
+.ch-top-nav-container {
+  margin-top: 50px;
+  margin-bottom: 0px;
 }

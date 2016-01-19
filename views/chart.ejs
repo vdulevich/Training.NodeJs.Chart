@@ -5,7 +5,7 @@
 <% var messagesId = 'chartMessages' %>
 <% var connectionStatusId = 'chartConnectionStatus' %>
 
-<div id="<%= containerId %>">
+<div id="<%= containerId %>" class="ch-chat-container">
     <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
     <form accept-charset="UTF-8" role="form" onsubmit="login();">
         <div class="row form-group-lg">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </form>
-    <ul id="<%= messagesId %>" class="list-group">
+    <ul id="<%= messagesId %>" class="ch-chat-messages-list list-group">
     </ul>
 </div>
 

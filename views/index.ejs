@@ -1,0 +1,12 @@
+<% layout('./layout/page') -%>
+
+
+<div class="container">
+    <h2>Node js Chat Application</h2>
+    Home page.
+    <% if(user) { %>
+        To use chat functionality go to <a href="/chart">chat</a> page.
+    <% } else { %>
+    To use chat functionality go to <a href="/login">login</a> page.
+    <% }%>
+</div>
