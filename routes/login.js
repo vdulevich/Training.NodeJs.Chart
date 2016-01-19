@@ -17,9 +17,7 @@ router.post('/', function(req, res, next){
                 return next(new errors.HttpError(403, err.message));
             }
             else {
-                res.json(err);
-                return;
-                //return next(err);
+                return next(err);
             }
         }
         req.session.user = user._id;
