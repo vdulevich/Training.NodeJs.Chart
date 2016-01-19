@@ -9,7 +9,6 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/', function(req, res, next){
-    return res.json(req.body);
     User.autorize(req.body.email, req.body.password, function(err, user){
         if(err) {
             if (err instanceof errors.AuthError) {
