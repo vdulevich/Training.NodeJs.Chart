@@ -73,7 +73,7 @@
 
     function send(){
         var data = formEl.serializeArray();
-        formEl.mask();
+        formEl.mask('Loading...');
         socket.emit('message', data[0].value , function(data){
             printMessage(data);
             messagesInputEl.value = '';

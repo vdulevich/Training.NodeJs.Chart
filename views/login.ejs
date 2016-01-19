@@ -43,7 +43,7 @@
     });
 
     function login(){
-        $('body').mask();
+        $('body').mask('Loading...');
         $.ajax('/login', {
             type: "POST",
             data: form.serialize(),
