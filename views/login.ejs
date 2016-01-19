@@ -33,8 +33,16 @@
     </div>
 </div>
 <script>
+    var form = $('#<%=formId%>');
+
+    form.bind('keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if(keyCode == 13){
+            login();
+        }
+    });
+
     function login(){
-        var form = $('#<%=formId%>');
         $.ajax('/login', {
             type: "POST",
             data: form.serialize(),

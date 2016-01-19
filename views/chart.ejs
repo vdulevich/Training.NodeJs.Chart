@@ -1,8 +1,9 @@
 <% layout('./layout/page') -%>
 <% block('scripts', "vendor/bower_components/socket.io-client/socket.io.js") -%>
 
-<% var containerId = 'chartContainer' %>
-<% var messagesId = 'chartMessages' %>
+<% var containerId = 'chatContainer' %>
+<% var messagesListId = 'chatMessageList' %>
+<% var chatMessageInputId = 'chatMessageInput' %>
 <% var connectionStatusId = 'chartConnectionStatus' %>
 
 <div id="<%= containerId %>" class="ch-chat-container">
@@ -10,22 +11,30 @@
     <form accept-charset="UTF-8" role="form" onsubmit="login();">
         <div class="row form-group-lg">
             <div class="col-md-9">
-                <input class="form-control" type="text" name="message"/>
+                <input id="<%=chatMessageInputId%>" class="form-control" type="text" name="message"/>
             </div>
             <div class="col-md-3">
                 <input class="form-control btn btn-lg btn-success btn-block" value="Send" onclick="send();">
             </div>
         </div>
     </form>
-    <ul id="<%= messagesId %>" class="ch-chat-messages-list list-group">
+    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group">
     </ul>
 </div>
 
 <script>
     var formEl = $('#<%=containerId%> form');
-    var messagesEl = $('#<%=messagesId%>')[0];
+    var messagesInputEl = $('#<%=chatMessageInputId%>')[0];
+    var messagesListEl = $('#<%=messagesListId%>')[0];
     var connectionStatusEl = $('#<%=connectionStatusId%>')[0];
     var socket = io.connect('', { reconnect: false });
+
+    formEl.bind('keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if(keyCode == 13){
+            send();
+        }
+    });
 
     connectionState("Connecting");
     socket
@@ -59,6 +68,7 @@
         var data = formEl.serializeArray();
         socket.emit('message', data[0].value , function(data){
             printMessage(data);
+            messagesInputEl.value = '';
         });
     }
 
@@ -71,7 +81,7 @@
     }
 
     function appendMessage(message, type){
-        messagesEl.appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
+        messagesListEl.appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
     }
 
     function connectionState(state){
