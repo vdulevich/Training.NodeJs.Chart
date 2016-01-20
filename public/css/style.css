@@ -14,6 +14,10 @@ a:hover {
   cursor:pointer;
 }
 
+.navbar-right {
+  padding-right: 15px;
+}
+
 .ch-main-container{
   height: 100%;
 

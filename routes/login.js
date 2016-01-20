@@ -1,4 +1,5 @@
 var express = require('express');
+var mongoose = require('lib/mongoose');
 var router = express.Router();
 var User = require('models/user');
 var errors = require('errors');
