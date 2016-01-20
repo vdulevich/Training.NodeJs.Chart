@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <link rel="stylesheet" href="/vendor/bower_components/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="/vendor/bower_components/jquery-loadmask/jquery.loadmask.css" />
         <link rel="stylesheet" href="/css/style.css" />
@@ -10,13 +11,30 @@
         <% if(blocks.scripts) { blocks.scripts.html.forEach(function(script) { %><script type="text/javascript" src="<%- script %>"></script><%  })} %>
     </head>
     <body>
-    <header><%- blocks.header %></header>
-    <section class="container ch-main-container">
-        <div class="ch-top-nav-container"><%- partial("../partials/topNavigation.ejs") %></div>
-        <% if(blocks.title) { %>
-            <h1><%- blocks.title%></h1>
-        <% } %>
-        <%- body %>
-    </section>
+        <div class="ch-page-wrapper container">
+            <div class="ch-header-wrapper">
+                <%-partial("../partials/topNavigation.ejs")%>
+            </div>
+            <div class="ch-main-wrapper container ch-flex-container">
+                <%-body%>
+            </div>
+           <div class="ch-footer-wrapper">Chat footer container</div>
+        </div>
     </body>
+<script>
+    function getResizeFn(className, cssHeight){
+        return function() {
+            $(className).each(function (index, item) {
+                var height = 0;
+                $(item).parent().children().not(className + ', script').each(function (index, child) {
+                    height += $(child).outerHeight(true);
+                });
+                var height = $(item).parent().height() - height - ($(item).outerHeight(true) - $(item).outerHeight());
+                $(item).css(cssHeight, height);
+            });
+        };
+    }
+    $(document).ready(getResizeFn('.ch-flex-container','height'));
+    $(window).resize(getResizeFn('.ch-flex-container','height'));
+</script>
 </html>

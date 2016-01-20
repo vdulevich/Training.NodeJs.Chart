@@ -7,9 +7,9 @@
 <% var connectionStatusId = 'chartConnectionStatus' %>
 <% var messagesButtonId = 'chatMessagesButton' %>
 
-<div id="<%= containerId %>" class="ch-chat-container">
-    <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
+<div id="<%= containerId %>" class="ch-flex-container">
     <form accept-charset="UTF-8" role="form">
+        <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
         <div class="row form-group-lg">
             <div class="col-md-9">
                 <input id="<%=chatMessageInputId%>" class="form-control" type="text" name="message"/>
@@ -19,11 +19,11 @@
             </div>
         </div>
     </form>
-    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group">
+    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group ch-flex-container">
     </ul>
 </div>
 
-<script>
+<script type="text/javascript">
     var socket = io.connect('', { reconnect: false });
     var formEl = $('#<%=containerId%> form');
     var messagesInputEl = $('#<%=chatMessageInputId%>');
@@ -76,7 +76,7 @@
         formEl.mask('Loading...');
         socket.emit('message', data[0].value , function(data){
             printMessage(data);
-            messagesInputEl.value = '';
+            messagesInputEl[0].value = '';
             formEl.unmask();
         });
     }
@@ -91,6 +91,7 @@
 
     function printText(message, type){
         messagesListEl[0].appendChild($(['<li class="list-group-item ', type ,'">',message,'</li>'].join(''))[0]);
+        messagesListEl.scrollTop(messagesListEl.find('li').last().position().top + messagesListEl.find('li').last().height());
     }
 
     function printConnectionState(state){

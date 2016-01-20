@@ -18,26 +18,85 @@ a:hover {
   padding-right: 15px;
 }
 
-.ch-main-container{
+.navbar-nav {
+  margin: 0px;
+}
+
+.nav > li {
+  display: inline-block;
+}
+
+.ch-page-wrapper {
   height: 100%;
-
+  position: relative;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
-.ch-top-nav-container {
-  padding-top:50px;
+.ch-header-wrapper {
+  margin: 20px 0px 20px 0px;
+}
+
+@media only screen and (max-width: 532px) {
+  .ch-header-wrapper {
+    margin: 0px;
+  }
+}
+
+.ch-main-wrapper {
   margin-bottom: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: lavender;
+  border-radius: 6px 6px 0px 0px;
 }
 
-.ch-chat-container {
+.ch-footer-wrapper {
+  background-color: darkslateblue;
+  border-radius: 0px 0px 6px 6px;
+  height: 50px;
+  bottom: 0px;
+  width: 100%;
+  color:white;
+  padding: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 532px) {
+  .ch-footer-wrapper {
+    border-radius: 0px;
+  }
 }
 
 .ch-chat-messages-list {
   margin-top: 20px;
   margin-bottom: 0px;
-  height: 100%;
+  overflow: auto;
   background-color: #f7f7f7;
 }
 
 .ch-chat-messages-list .list-group-item{
   border-radius: 0px;
 }
+
+.ch-fit-container{
+  height: 100%;
+}
+
+.ch-top-navbar {
+  background-color: darkslateblue;
+  border-radius: 6px;
+  margin: 0px;
+}
+
+@media only screen and (max-width: 532px) {
+  .ch-top-navbar {
+    border-radius: 0px;
+    border: none;
+  }
+}
+
+.ch-top-navbar.navbar-default .navbar-nav > li > a {
+  color: #fff;
+}
+
