@@ -23,13 +23,23 @@
         </div>
     </body>
     <script type="text/javascript">
-        $(document).ready(getResizeFn('.ch-flex-container','min-height'));
-        $(document).ready(getResizeFn('.ch-fit-container','height'));
-        $(window).resize(function(){
-            $('.ch-flex-container').each(function (index, item) { $(item).css('min-height', 0);});
-            $('.ch-fit-container').each(function (index, item) { $(item).css('height', 0);});
-            getResizeFn('.ch-flex-container','min-height')();
-            getResizeFn('.ch-fit-container','height')();
-        });
+        (function bindResize(){
+            $(document).ready(getResizeFn('.ch-flex-container','min-height'));
+            $(document).ready(getResizeFn('.ch-fit-container','height'));
+            function resize(){
+                $('.ch-flex-container').each(function (index, item) {
+                    $(item).css('min-height', 0);
+                });
+                getResizeFn('.ch-flex-container', 'min-height')();
+                $('.ch-fit-container').each(function (index, item) {
+                    $(item).css('height', 0);
+                });
+                getResizeFn('.ch-fit-container', 'height')();
+            }
+            if(isMobile) {
+                $(window).bind("orientationchange", resize);
+            } else {
+                $(window).resize(resize);
+        }})();
     </script>
 </html>
