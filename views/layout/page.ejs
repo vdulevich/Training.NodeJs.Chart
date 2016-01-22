@@ -8,33 +8,28 @@
         <script type="text/javascript" src="/vendor/bower_components/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="/vendor/bower_components/bootstrap/dist/js/bootstrap.js"></script>
         <script type="text/javascript" src="/vendor/bower_components/jquery-loadmask/jquery.loadmask.min.js"></script>
+        <script type="text/javascript" src="/js/script.js"></script>
         <% if(blocks.scripts) { blocks.scripts.html.forEach(function(script) { %><script type="text/javascript" src="<%- script %>"></script><%  })} %>
     </head>
     <body>
-        <div class="ch-page-wrapper container">
-            <div class="ch-header-wrapper">
+        <div class="ch-container-wrapper container">
+            <div class="ch-header">
                 <%-partial("../partials/topNavigation.ejs")%>
             </div>
-            <div class="ch-main-wrapper container ch-flex-container">
+            <div class="ch-center ch-flex-container">
                 <%-body%>
             </div>
-           <div class="ch-footer-wrapper">Chat footer container</div>
+            <div class="ch-footer">Chat footer container</div>
         </div>
     </body>
-<script>
-    function getResizeFn(className, cssHeight){
-        return function() {
-            $(className).each(function (index, item) {
-                var height = 0;
-                $(item).parent().children().not(className + ', script').each(function (index, child) {
-                    height += $(child).outerHeight(true);
-                });
-                var height = $(item).parent().height() - height - ($(item).outerHeight(true) - $(item).outerHeight());
-                $(item).css(cssHeight, height);
-            });
-        };
-    }
-    $(document).ready(getResizeFn('.ch-flex-container','height'));
-    $(window).resize(getResizeFn('.ch-flex-container','height'));
-</script>
+    <script type="text/javascript">
+        $(document).ready(getResizeFn('.ch-flex-container','min-height'));
+        $(document).ready(getResizeFn('.ch-fit-container','height'));
+        $(window).resize(function(){
+            $('.ch-flex-container').each(function (index, item) { $(item).css('min-height', 0);});
+            $('.ch-fit-container').each(function (index, item) { $(item).css('height', 0);});
+            getResizeFn('.ch-flex-container','min-height')();
+            getResizeFn('.ch-fit-container','height')();
+        });
+    </script>
 </html>

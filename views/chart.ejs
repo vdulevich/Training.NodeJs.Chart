@@ -7,19 +7,21 @@
 <% var connectionStatusId = 'chartConnectionStatus' %>
 <% var messagesButtonId = 'chatMessagesButton' %>
 
-<div id="<%= containerId %>" class="ch-flex-container">
-    <form accept-charset="UTF-8" role="form">
-        <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
-        <div class="row form-group-lg">
-            <div class="col-md-9">
-                <input id="<%=chatMessageInputId%>" class="form-control" type="text" name="message"/>
+<div id="<%=containerId%>" class="ch-flex-container">
+    <div class="ui-layout-north">
+        <form accept-charset="UTF-8" role="form">
+            <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
+            <div class="row form-group-lg">
+                <div class="col-md-9">
+                    <input id="<%=chatMessageInputId%>" class="form-control" type="text" name="message"/>
+                </div>
+                <div class="col-md-3">
+                    <input id="<%=messagesButtonId%>" class="form-control btn btn-lg btn-success btn-block" value="Send">
+                </div>
             </div>
-            <div class="col-md-3">
-                <input id="<%=messagesButtonId%>" class="form-control btn btn-lg btn-success btn-block" value="Send">
-            </div>
-        </div>
-    </form>
-    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group ch-flex-container">
+        </form>
+    </div>
+    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group ch-fit-container">
     </ul>
 </div>
 

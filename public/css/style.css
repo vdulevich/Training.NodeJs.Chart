@@ -3,7 +3,9 @@ html, body{
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
 }
 
 a {
@@ -14,57 +16,46 @@ a:hover {
   cursor:pointer;
 }
 
-.navbar-right {
-  padding-right: 15px;
-}
-
 .navbar-nav {
-  margin: 0px;
+  margin: 0px -15px;
 }
 
-.nav > li {
-  display: inline-block;
-}
-
-.ch-page-wrapper {
-  height: 100%;
-  position: relative;
+.ch-container-wrapper {
   padding-right: 0px;
   padding-left: 0px;
+  height: auto;
+  min-height: 100%;
 }
 
-.ch-header-wrapper {
+.ch-header {
   margin: 20px 0px 20px 0px;
 }
 
 @media only screen and (max-width: 532px) {
-  .ch-header-wrapper {
+  .ch-header {
     margin: 0px;
   }
 }
 
-.ch-main-wrapper {
-  margin-bottom: 0px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  background-color: lavender;
+.ch-center {
   border-radius: 6px 6px 0px 0px;
+  background-color: lavender;
+  padding: 15px;
 }
 
-.ch-footer-wrapper {
+.ch-footer {
   background-color: darkslateblue;
   border-radius: 0px 0px 6px 6px;
-  height: 50px;
-  bottom: 0px;
-  width: 100%;
+  min-height: 40px;
   color:white;
   padding: 10px;
   text-align: center;
 }
 
 @media only screen and (max-width: 532px) {
-  .ch-footer-wrapper {
+  .ch-footer {
     border-radius: 0px;
+    min-height:40px;
   }
 }
 
@@ -73,6 +64,7 @@ a:hover {
   margin-bottom: 0px;
   overflow: auto;
   background-color: #f7f7f7;
+  min-height:100px;
 }
 
 .ch-chat-messages-list .list-group-item{
@@ -87,16 +79,23 @@ a:hover {
   background-color: darkslateblue;
   border-radius: 6px;
   margin: 0px;
+  border: none;
+  overflow: hidden;
+}
+
+.ch-top-navbar .navbar-text{
+  color: #fff;
+}
+
+.ch-top-navbar .icon-bar{
+  background-color: white;
 }
 
 @media only screen and (max-width: 532px) {
   .ch-top-navbar {
     border-radius: 0px;
-    border: none;
   }
 }
 
-.ch-top-navbar.navbar-default .navbar-nav > li > a {
-  color: #fff;
-}
+
 
