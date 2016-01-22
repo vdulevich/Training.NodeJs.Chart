@@ -30,16 +30,29 @@
                 $('.ch-flex-container').each(function (index, item) {
                     $(item).css('min-height', 0);
                 });
-                getResizeFn('.ch-flex-container', 'min-height')();
                 $('.ch-fit-container').each(function (index, item) {
                     $(item).css('height', 0);
                 });
+                getResizeFn('.ch-flex-container', 'min-height')();
                 getResizeFn('.ch-fit-container', 'height')();
             }
-            if(isMobile) {
-                $(window).bind("orientationchange", resize);
-            } else {
-                $(window).resize(resize);
-        }})();
+            function getOrientation(){
+                return window.innerHeight / innerWidth > 1 ? 'p' : 'l';
+            }
+            var oldOrintation = getOrientation();
+            $(window).resize(function() {
+                setTimeout(function () {
+                    if (isMobile) {
+                        var newOrintation = getOrientation();
+                        if (oldOrintation != newOrintation) {
+                            oldOrintation = newOrintation;
+                            resize();
+                        }
+                    } else {
+                        resize();
+                    }
+                }, 10)
+            });
+        })();
     </script>
 </html>
