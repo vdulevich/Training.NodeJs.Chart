@@ -20,20 +20,46 @@ a:hover {
   margin: 0px -15px;
 }
 
-.ch-container-wrapper {
+.ch-container {
   padding-right: 0px;
   padding-left: 0px;
-  height: auto;
+  height: 100%;
+}
+
+.ch-wrapper{
+  height: auto !important;
   min-height: 100%;
+  margin-bottom: -40px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.ch-wrapper::before {
+  content: '';
+  display: block;
+  border-radius: 6px 6px 0px 0px;
+  background-color: lavender;
+  position: absolute;
+  top: 90px;
+  bottom: 40px;
+  width: 100%;
+}
+
+@media only screen and (max-width: 532px) {
+  .ch-wrapper::before{
+    top: 50px;
+  }
 }
 
 .ch-header {
-  margin: 20px 0px 20px 0px;
+  position: relative;
+  padding: 20px 0px 20px 0px;
+  z-index: 1;
 }
 
 @media only screen and (max-width: 532px) {
   .ch-header {
-    margin: 0px;
+    padding: 0px;
   }
 }
 
@@ -41,6 +67,7 @@ a:hover {
   border-radius: 6px 6px 0px 0px;
   background-color: lavender;
   padding: 15px;
+  position: relative;
 }
 
 .ch-footer {

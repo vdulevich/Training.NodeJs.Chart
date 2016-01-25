@@ -7,7 +7,7 @@
 <% var connectionStatusId = 'chartConnectionStatus' %>
 <% var messagesButtonId = 'chatMessagesButton' %>
 
-<div id="<%=containerId%>" class="ch-flex-container">
+<div id="<%=containerId%>" class="ch-chat-container">
     <div class="ui-layout-north">
         <form accept-charset="UTF-8" role="form">
             <label class="form-group-lg"><span>Status:</span><span id="<%= connectionStatusId %>"></span></label>
@@ -21,7 +21,7 @@
             </div>
         </form>
     </div>
-    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group ch-fit-container">
+    <ul id="<%= messagesListId %>" class="ch-chat-messages-list list-group">
     </ul>
 </div>
 
@@ -99,4 +99,8 @@
     function printConnectionState(state){
         connectionStatusEl[0].innerHTML = state;
     }
+
+    $(document).ready(getResizeFn('.ch-center','min-height'));
+    $(document).ready(getResizeFn('.ch-chat-container','height'));
+    $(document).ready(getResizeFn('.ch-chat-messages-list','height'));
 </script>

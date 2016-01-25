@@ -12,47 +12,16 @@
         <% if(blocks.scripts) { blocks.scripts.html.forEach(function(script) { %><script type="text/javascript" src="<%- script %>"></script><%  })} %>
     </head>
     <body>
-        <div class="ch-container-wrapper container">
-            <div class="ch-header">
-                <%-partial("../partials/topNavigation.ejs")%>
-            </div>
-            <div class="ch-center ch-flex-container">
-                <%-body%>
+        <div class="ch-container container">
+            <div class="ch-wrapper">
+                <div class="ch-header">
+                    <%-partial("../partials/topNavigation.ejs")%>
+                </div>
+                <div class="ch-center">
+                    <%-body%>
+                </div>
             </div>
             <div class="ch-footer">Chat footer container</div>
         </div>
     </body>
-    <script type="text/javascript">
-        (function bindResize(){
-            $(document).ready(getResizeFn('.ch-flex-container','min-height'));
-            $(document).ready(getResizeFn('.ch-fit-container','height'));
-            function resize(){
-                $('.ch-flex-container').each(function (index, item) {
-                    $(item).css('min-height', 0);
-                });
-                $('.ch-fit-container').each(function (index, item) {
-                    $(item).css('height', 0);
-                });
-                getResizeFn('.ch-flex-container', 'min-height')();
-                getResizeFn('.ch-fit-container', 'height')();
-            }
-            function getOrientation(){
-                return window.innerHeight / innerWidth > 1 ? 'p' : 'l';
-            }
-            var oldOrintation = getOrientation();
-            $(window).resize(function() {
-                setTimeout(function () {
-                    if (isMobile) {
-                        var newOrintation = getOrientation();
-                        if (oldOrintation != newOrintation) {
-                            oldOrintation = newOrintation;
-                            resize();
-                        }
-                    } else {
-                        resize();
-                    }
-                }, 10)
-            });
-        })();
-    </script>
 </html>
